@@ -38,7 +38,7 @@
     </ItemGroup>
     
     <ItemGroup>
-        <ProjectReference Include="..\..\src\Web\Web.csproj" />
+        <ProjectReference Include="..\..\src\AutoPost.Web\AutoPost.Web.csproj" />
     </ItemGroup>
 
 </Project>
