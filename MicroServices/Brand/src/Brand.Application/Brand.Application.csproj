@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="PostContent\Queries\" />
+    <Folder Include="Brand\Queries\" />
   </ItemGroup>
 
 </Project>

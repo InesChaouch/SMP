@@ -7,7 +7,8 @@ public class Posts : EndpointGroupBase
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
-            .MapPost(AutomatePosts);
+            .MapPost(AutomatePosts, "AutomatePosts");
+
     }
 
     public async Task<Results<Ok, BadRequest<string>>> AutomatePosts(

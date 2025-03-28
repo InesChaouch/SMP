@@ -6,18 +6,18 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/api/Posts": {
+    "/api/Posts/CreatePost": {
       "post": {
         "tags": [
           "Posts"
         ],
-        "operationId": "AutomatePosts",
+        "operationId": "CreatePost",
         "requestBody": {
           "x-name": "dto",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AutomatePostCommand"
+                "$ref": "#/components/schemas/CreatePostLinkedCommand"
               }
             }
           },
@@ -480,7 +480,7 @@
   },
   "components": {
     "schemas": {
-      "AutomatePostCommand": {
+      "CreatePostLinkedCommand": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -490,11 +490,8 @@
           "topic": {
             "type": "string"
           },
-          "platformConfigs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/PlatformConfig"
-            }
+          "config": {
+            "$ref": "#/components/schemas/PlatformConfig"
           }
         }
       },

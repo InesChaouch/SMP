@@ -6,7 +6,7 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/api/Posts": {
+    "/api/Posts/AutomatePosts": {
       "post": {
         "tags": [
           "Posts"
@@ -17,7 +17,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AutomatePostCommand"
+                "$ref": "#/components/schemas/AutomatePostsCommand"
               }
             }
           },
@@ -480,7 +480,7 @@
   },
   "components": {
     "schemas": {
-      "AutomatePostCommand": {
+      "AutomatePostsCommand": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -511,6 +511,12 @@
           },
           "format": {
             "$ref": "#/components/schemas/Format"
+          },
+          "tones": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "guidelines": {
             "type": "array",
@@ -563,6 +569,12 @@
           },
           "topic": {
             "type": "string"
+          },
+          "tones": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "guidelines": {
             "type": "array",

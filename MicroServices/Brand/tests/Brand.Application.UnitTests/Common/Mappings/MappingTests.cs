@@ -3,8 +3,6 @@ using System.Runtime.CompilerServices;
 using AutoMapper;
 using SMP.Application.Common.Interfaces;
 using SMP.Application.Common.Models;
-using SMP.Application.TodoItems.Queries.GetTodoItemsWithPagination;
-using SMP.Application.TodoLists.Queries.GetTodos;
 using SMP.Domain.Entities;
 using NUnit.Framework;
 
@@ -30,11 +28,9 @@ public class MappingTests
     }
 
     [Test]
-    [TestCase(typeof(TodoList), typeof(TodoListDto))]
-    [TestCase(typeof(TodoItem), typeof(TodoItemDto))]
+
     [TestCase(typeof(TodoList), typeof(LookupDto))]
     [TestCase(typeof(TodoItem), typeof(LookupDto))]
-    [TestCase(typeof(TodoItem), typeof(TodoItemBriefDto))]
     public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
     {
         var instance = GetInstanceOf(source);

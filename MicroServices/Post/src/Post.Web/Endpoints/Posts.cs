@@ -1,17 +1,17 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using SMP.Application.PostContent.Commands.AutomatePosts;
+using SMP.Application.Posts.Commands.AutomatePosts;
+
 
 public class Posts : EndpointGroupBase
 {
     public override void Map(WebApplication app)
     {
         app.MapGroup(this)
-            .MapPost(AutomatePosts);
+            .MapPost(CreatePost, "CreatePost");
     }
 
-    public async Task<Results<Ok, BadRequest<string>>> AutomatePosts(
-         AutomatePostCommand dto,
+    public async Task<Results<Ok, BadRequest<string>>> CreatePost(
+         CreatePostLinkedCommand dto,
         ISender sender)
     {
         try
@@ -21,7 +21,7 @@ public class Posts : EndpointGroupBase
         }
         catch (Exception ex)
         {
-            return TypedResults.BadRequest($"Failed to automate posts: {ex.Message}");
+            return TypedResults.BadRequest($"Failed to create post: {ex.Message}");
         }
     }
 }

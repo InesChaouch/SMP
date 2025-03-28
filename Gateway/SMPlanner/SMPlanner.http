@@ -1,0 +1,6 @@
+@SMPlanner_HostAddress = http://localhost:5127
+
+GET {{SMPlanner_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
