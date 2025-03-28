@@ -25,6 +25,7 @@ public class CreatePostLinkedCommandHandler(ILinkedInService linkedInService, Ht
         var generateContentCommand = new GenerateContentCommand
         {
             Platform = request.Config.Platform,
+            Tones = request.Config.Tones,
             Format = request.Config.Format,
             Category = request.Category,
             Topic = request.Topic,
@@ -39,14 +40,6 @@ public class CreatePostLinkedCommandHandler(ILinkedInService linkedInService, Ht
         }
         else if (request.Config.Format == Format.Image)
         {
-            var resultInitializeImage = await _linkedInService.InitializeImage();
-            var resultToRead = await resultInitializeImage.Content.ReadFromJsonAsync<JsonElement>();
-
-            var uploadUrl = resultToRead.GetProperty("value").GetProperty("uploadMechanism")
-                .GetProperty("com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest")
-                .GetProperty("uploadUrl").GetString();
-
-            var assetUrn = resultToRead.GetProperty("value").GetProperty("asset").GetString()?.Substring(25);
 
             byte[] backgroundBytes = !string.IsNullOrWhiteSpace(request.Config.BackgroundImage)
                 ? await _httpClient.GetByteArrayAsync(request.Config.BackgroundImage)
@@ -71,6 +64,15 @@ public class CreatePostLinkedCommandHandler(ILinkedInService linkedInService, Ht
             await image.SaveAsJpegAsync(ms);
             var finalImageBytes = ms.ToArray();
 
+            var resultInitializeImage = await _linkedInService.InitializeImage();
+            var resultToRead = await resultInitializeImage.Content.ReadFromJsonAsync<JsonElement>();
+
+            var uploadUrl = resultToRead.GetProperty("value").GetProperty("uploadMechanism")
+                .GetProperty("com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest")
+                .GetProperty("uploadUrl").GetString();
+
+            var assetUrn = resultToRead.GetProperty("value").GetProperty("asset").GetString()?.Substring(25);
+
             await _linkedInService.UploadImage(uploadUrl!, finalImageBytes);
             await _linkedInService.SharePostImageAsync(assetUrn!);
         }
@@ -79,11 +81,7 @@ public class CreatePostLinkedCommandHandler(ILinkedInService linkedInService, Ht
             byte[] backgroundBytes = !string.IsNullOrWhiteSpace(request.Config.BackgroundImage)
                 ? await _httpClient.GetByteArrayAsync(request.Config.BackgroundImage)
                 : await _httpClient.GetByteArrayAsync("https://thefusioneer.com/wp-content/uploads/2023/11/5-AI-Advancements-to-Expect-in-the-Next-10-Years-scaled.jpeg");
-            var resultInitializeDocument = await _linkedInService.InitializeDocument();
-            var resultToRead = await resultInitializeDocument.Content.ReadFromJsonAsync<JsonElement>();
-
-            var uploadUrl = resultToRead.GetProperty("value").GetProperty("uploadUrl").GetString();
-            var assetUrn = resultToRead.GetProperty("value").GetProperty("document").GetString()?.Substring(16);
+           
             var document = new PdfDocument();
 
             var slides = JsonSerializer.Deserialize<List<Slide>>(content, new JsonSerializerOptions
@@ -186,10 +184,16 @@ public class CreatePostLinkedCommandHandler(ILinkedInService linkedInService, Ht
                 using var gfx = XGraphics.FromPdfPage(page);
                 gfx.DrawImage(xImage, 0, 0, page.Width.Point, page.Height.Point);
             }
-
+           
             using var outputStream = new MemoryStream();
             document.Save(outputStream, false);
             var fileBytes = outputStream.ToArray();
+
+            var resultInitializeDocument = await _linkedInService.InitializeDocument();
+            var resultToRead = await resultInitializeDocument.Content.ReadFromJsonAsync<JsonElement>();
+
+            var uploadUrl = resultToRead.GetProperty("value").GetProperty("uploadUrl").GetString();
+            var assetUrn = resultToRead.GetProperty("value").GetProperty("document").GetString()?.Substring(16);
 
             await _linkedInService.UploadDocument(uploadUrl!, fileBytes);
             await _linkedInService.SharePostDocumentAsync(assetUrn!);

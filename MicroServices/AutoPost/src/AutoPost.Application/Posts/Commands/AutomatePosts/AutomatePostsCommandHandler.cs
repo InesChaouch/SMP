@@ -25,6 +25,7 @@ public class AutomatePostsCommandHandler(ISender sender) : IRequestHandler<Autom
                         Platform = platformConfig.Platform,
                         Format = platformConfig.Format,
                         Guidelines = platformConfig.Guidelines,
+                        Tones = platformConfig.Tones,
                         BackgroundImage = platformConfig.BackgroundImage,
                     }
                 };

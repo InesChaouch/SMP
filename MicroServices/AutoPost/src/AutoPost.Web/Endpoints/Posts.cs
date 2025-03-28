@@ -11,7 +11,7 @@ public class Posts : EndpointGroupBase
     }
 
     public async Task<Results<Ok, BadRequest<string>>> AutomatePosts(
-         AutomatePostCommand dto,
+         AutomatePostsCommand dto,
         ISender sender)
     {
         try

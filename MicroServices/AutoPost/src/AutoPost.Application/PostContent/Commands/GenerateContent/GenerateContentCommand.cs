@@ -13,7 +13,9 @@ namespace SMP.Application.PostContent.Commands.GenerateContent
             public Format Format { get; set; } = Format.Text;
             public required string Category { get; set; }
             public required string Topic { get; set; }
-            public required List<string> Guidelines { get; set; }
+        public required List<string> Tones { get; set; }
+
+        public required List<string> Guidelines { get; set; }
 
         }
     }

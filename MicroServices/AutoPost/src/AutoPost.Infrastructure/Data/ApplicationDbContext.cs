@@ -39,10 +39,10 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
         builder
             .Entity<Post>()
-                .HasOne(p => p.PostFormat)  
-                .WithMany(pf => pf.Posts)   
-                .HasForeignKey(p => p.PostFormatId)  
-                .OnDelete(DeleteBehavior.Restrict); 
+                .HasOne(p => p.PostFormat)
+                .WithMany(pf => pf.Posts)
+                .HasForeignKey(p => p.PostFormatId)
+                .OnDelete(DeleteBehavior.Restrict);
 
         builder
             .Entity<Post>()
@@ -66,7 +66,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-        
+
     }
 
 }
