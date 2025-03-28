@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SMP.Domain.Dtos;
 using SMP.Domain.Enums;
-using SMP.Application.Posts.Commands.CreatePost;
+using SMP.Application.Posts.Commands.AutomatePosts;
 
 namespace SMP.Application.PostContent.Commands.AutomatePosts
 {

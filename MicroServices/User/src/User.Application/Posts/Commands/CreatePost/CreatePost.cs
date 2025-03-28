@@ -13,7 +13,7 @@ using PdfSharp.Drawing;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Formats.Png;
 
-namespace SMP.Application.Posts.Commands.CreatePost
+namespace SMP.Application.Posts.Commands.AutomatePosts
 {
     public record CreatePostLinkedCommand : IRequest<bool>
     {

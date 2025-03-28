@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using SMP.Infrastructure.Settings;
 using SMP.Application.Interfaces;
 using SMP.Infrastructure.Apis.LinkedIn;
+using SMP.Infrastructure.Apis.Gemini;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -35,6 +36,9 @@ public static class DependencyInjection
             builder.Configuration.GetSection("LinkedInSettings")
         );
         builder.Services.AddScoped<ILinkedInService,LinkedInService>();
+
+        builder.Services.AddScoped<IGeminiService, GeminiService>();
+
         builder.Services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
 
         builder.Services.AddScoped<ApplicationDbContextInitialiser>();

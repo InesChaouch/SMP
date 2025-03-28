@@ -4,36 +4,39 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
-using SMP.Application.PostContent.Commands.GenerateContent;
 using SMP.Domain.Enums;
 using System.Text.RegularExpressions;
+using SMP.Application.Interfaces;
+using System.Linq;
 
-namespace SMP.Application.PostContent.Commands.GenerateContentCommandHandler
+namespace SMP.Application.PostContent.Commands.GenerateContent
 {
-    public class GenerateContentCommandHandler : IRequestHandler<GenerateContentCommand, string>
+    public class GenerateContentCommandHandler(IGeminiService geminiService) : IRequestHandler<GenerateContentCommand, string>
     {
-        private readonly HttpClient _httpClient;
-        private readonly IConfiguration _config;
-        private readonly string _geminiToken;
-
-        public GenerateContentCommandHandler(HttpClient httpClient, IConfiguration config)
-        {
-            _httpClient = httpClient;
-            _config = config;
-            _geminiToken = _config.GetValue<string>("Tokens:GeminiToken")!;
-        }
-        private const string GeminiUrlApi = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-001:generateContent";
-
+        private readonly IGeminiService _geminiService = geminiService;
 
         public async Task<string> Handle(GenerateContentCommand request, CancellationToken cancellationToken)
         {
-            var generatedText = "";
             var sb = new StringBuilder();
-            const int maxRetries = 5;
+            var tones ="";
+            if(request.Tones.Count > 0) { 
+            foreach (var tone in request.Tones)
+            {
+                sb.Append(tone).Append(",");
+            }
+            sb.Remove(sb.Length-1, 1);
 
+            tones = sb.ToString();
+            
+            sb.Clear();
+            }
             if (request.Format == Format.Text)
             {
-                sb.AppendLine($@"Generate an engaging {request.Platform} post in {request.Format} format for a {request.Category}. The topic is {request.Topic}.");
+                sb.AppendLine($"Generate an engaging {request.Platform} post in {request.Format} format for a {request.Category}. The topic is {request.Topic}.");
+                if (tones !=null)
+                {
+                    sb.AppendLine($"Use this tone: {tones}");
+                }
                 sb.AppendLine("Rules:");
                 sb.AppendLine("- Do NOT use bold text.");
                 sb.AppendLine("- Use ALL CAPS for title and section headings.");
@@ -48,8 +51,12 @@ namespace SMP.Application.PostContent.Commands.GenerateContentCommandHandler
             }
             else if (request.Format == Format.Image)
             {
-                sb.AppendLine($@"Generate a short and impactful paragraph (minimum 10 words and maximum 20 words) that can be embedded inside a {request.Platform} image post for {request.Category}.");
+                sb.AppendLine($"Generate a short and impactful paragraph (minimum 10 words and maximum 20 words) that can be embedded inside a {request.Platform} image post for {request.Category}.");
                 sb.AppendLine($"The topic is: {request.Topic}.");
+                if (tones != null)
+                {
+                    sb.AppendLine($"Use this tone: {tones}");
+                }
                 sb.AppendLine("Rules:");
                 sb.AppendLine("- No hashtags, no emojis, no links.");
                 sb.AppendLine("- Do NOT use bold text.");
@@ -66,8 +73,12 @@ namespace SMP.Application.PostContent.Commands.GenerateContentCommandHandler
             }
             else if (request.Format == Format.Document)
             {
-                sb.AppendLine($@"I want to create a {request.Platform} carousel post for {request.Category}.");
+                sb.AppendLine($"I want to create a {request.Platform} carousel post for {request.Category}.");
                 sb.AppendLine($"The topic is: {request.Topic}.");
+                if (tones != null)
+                {
+                    sb.AppendLine($"Use this tone: {tones}");
+                }
                 sb.AppendLine("Please generate a carousel with the following for each slide:");
                 sb.AppendLine("- A title (short and engaging, max 8 words)");
                 sb.AppendLine("- A brief content paragraph (2–4 sentences, concise, easy to read)");
@@ -85,70 +96,18 @@ namespace SMP.Application.PostContent.Commands.GenerateContentCommandHandler
                 sb.AppendLine("The goal is to catch attention visually when the post is viewed in-feed.");
             }
 
-            var prompt = new
-            {
-                contents = new[]
-                {
-            new
-            {
-                parts = new[]
-                {
-                    new
-                    {
-                        text = sb.ToString()
-                    }
-                }
-            }
-        }
-            };
+            var result = await _geminiService.GenerateAsync(sb.ToString(), cancellationToken);
 
-            var json = JsonSerializer.Serialize(prompt);
+            using var document = JsonDocument.Parse(result);
+            var root = document.RootElement;
 
-            for (int attempt = 0; attempt < maxRetries; attempt++)
-            {
-                try
-                {
-                    using var apiRequest = new HttpRequestMessage(HttpMethod.Post, $"{GeminiUrlApi}?key={_geminiToken}")
-                    {
-                        Content = new StringContent(json, Encoding.UTF8, "application/json")
-                    };
+            var textElement = root
+    .GetProperty("candidates")[0]
+    .GetProperty("content")
+    .GetProperty("parts")[0]
+    .GetProperty("text");
 
-                    var response = await _httpClient.SendAsync(apiRequest, cancellationToken);
-
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        var error = await response.Content.ReadAsStringAsync();
-                        throw new ApplicationException($"Gemini API call failed: {response.StatusCode} - {error}");
-                    }
-
-                    var result = await response.Content.ReadAsStringAsync();
-
-                    using var document = JsonDocument.Parse(result);
-                    var root = document.RootElement;
-
-                    generatedText = root
-                        .GetProperty("candidates")[0]
-                        .GetProperty("content")
-                        .GetProperty("parts")[0]
-                        .GetProperty("text")
-                        .GetString();
-
-                    break; 
-                }
-                catch (Exception ex)
-                {
-                    if (ex.Message.Contains("503") || ex.Message.Contains("overloaded"))
-                    {
-                        int delay = (int)Math.Pow(2, attempt);
-                        Console.WriteLine($"Tentative {attempt + 1} échouée. Nouvelle tentative dans {delay} secondes...");
-                        await Task.Delay(delay * 1000);
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-            }
+            string generatedText = textElement.GetString() ?? string.Empty;
 
             if (request.Format == Format.Document)
             {
@@ -179,4 +138,3 @@ namespace SMP.Application.PostContent.Commands.GenerateContentCommandHandler
         }
     }
 }
-    
