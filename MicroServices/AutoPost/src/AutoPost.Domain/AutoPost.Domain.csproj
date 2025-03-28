@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>SMP.Domain</RootNamespace>
+    <AssemblyName>SMP.Domain</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Carousel\" />
+  </ItemGroup>
+
+</Project>
