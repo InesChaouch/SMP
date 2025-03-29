@@ -1,5 +1,5 @@
 ﻿
-namespace SMPlanner.Infrastructure.Entite;
+namespace SMPlanner.Infrastructure.Entities;
 public  class ApiResponse<T>
 {
     public ApiResponse()

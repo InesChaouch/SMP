@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Infrastructure\SMPlanner.Infrastructure\SMPlanner.Infrastructure.csproj" />
     <ProjectReference Include="..\AutoPost.Domain\AutoPost.Domain.csproj" />
   </ItemGroup>
 

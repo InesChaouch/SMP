@@ -1,4 +1,6 @@
-﻿using PdfSharp.Drawing;
+﻿using System.Net.Http.Json;
+using System.Text.Json;
+using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
@@ -11,9 +13,7 @@ using SMP.Application.Interfaces;
 using SMP.Application.PostContent.Commands.GenerateContent;
 using SMP.Application.Posts.Commands.AutomatePosts;
 using SMP.Domain.Dtos;
-using SMP.Domain.Enums;
-using System.Net.Http.Json;
-using System.Text.Json;
+using SMPlanner.Infrastructure.Enum;
 
 public class CreatePostLinkedCommandHandler(ILinkedInService linkedInService, HttpClient httpClient, ISender sender, IApplicationDbContext context) : IRequestHandler<CreatePostLinkedCommand, bool>
 {

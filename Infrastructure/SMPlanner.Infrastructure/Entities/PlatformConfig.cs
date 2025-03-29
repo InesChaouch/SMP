@@ -1,6 +1,6 @@
 ﻿using SMPlanner.Infrastructure.Enum;
 
-namespace SMPlanner.Infrastructure.Entite;
+namespace SMPlanner.Infrastructure.Entities;
 public class PlatformConfig
 {
     public Platform Platform { get; set; }

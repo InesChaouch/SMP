@@ -481,6 +481,17 @@
   "components": {
     "schemas": {
       "AutomatePostsCommand": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PostConfigDto"
+          },
+          {
+            "type": "object",
+            "additionalProperties": false
+          }
+        ]
+      },
+      "PostConfigDto": {
         "type": "object",
         "additionalProperties": false,
         "properties": {
@@ -509,14 +520,14 @@
             "type": "string",
             "nullable": true
           },
-          "format": {
-            "$ref": "#/components/schemas/Format"
-          },
           "tones": {
             "type": "array",
             "items": {
               "type": "string"
             }
+          },
+          "format": {
+            "$ref": "#/components/schemas/Format"
           },
           "guidelines": {
             "type": "array",

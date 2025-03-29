@@ -1,4 +1,4 @@
-﻿namespace SMPlanner.Infrastructure.Entite;
+﻿namespace SMPlanner.Infrastructure.Entities;
 public class PostConfigDto
 {
     public required string Category { get; set; }

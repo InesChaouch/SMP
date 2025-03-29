@@ -2,8 +2,8 @@
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SMPlanner.Infrastructure.Constantes;
-using SMPlanner.Infrastructure.Entite;
+using SMPlanner.Infrastructure.Constants;
+using SMPlanner.Infrastructure.Entities;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SMPlanner.Controllers;
@@ -36,7 +36,7 @@ public class AutoPostController : ControllerBase
             // Check if the request was successful (status code in the 2xx range)
             if (response.IsSuccessStatusCode)
             {   
-                if (responseContent != "" || responseContent != null)
+                if (responseContent != "" && responseContent != null)
                 {
                     // Deserialize the entire response into an intermediate object
                     var responseObject = JsonConvert.DeserializeObject<ApiResponse<PostConfigDto>>(responseContent)?.Result;

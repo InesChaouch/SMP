@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SMPlanner.Infrastructure.Entite;
+namespace SMPlanner.Infrastructure.Entities;
 public class BrandDto
 {
 }

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
+﻿using System.Text;
 using System.Text.Json;
-using Microsoft.Extensions.Configuration;
-using SMP.Domain.Enums;
 using System.Text.RegularExpressions;
 using SMP.Application.Interfaces;
-using System.Linq;
+using SMPlanner.Infrastructure.Enum;
 
 namespace SMP.Application.PostContent.Commands.GenerateContent
 {

@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using Newtonsoft.Json;
-using SMPlanner.Infrastructure.Entite;
+using SMPlanner.Infrastructure.Entities;
 
 namespace SMPlanner.Infrastructure.Service.HttpRequest;
 public class HttpRequestService

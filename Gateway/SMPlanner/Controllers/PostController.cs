@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using SMPlanner.Infrastructure.Constantes;
-using SMPlanner.Infrastructure.Entite;
+using SMPlanner.Infrastructure.Constants;
+using SMPlanner.Infrastructure.Entities;
 using SMPlanner.Infrastructure.Service.HttpRequest;
 
 namespace SMPlanner.Controllers;

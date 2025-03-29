@@ -1,6 +1,6 @@
 ﻿using SMP.Application.PostContent.Commands.AutomatePosts;
-using SMP.Domain.Dtos;
-using SMP.Domain.Enums;
+using SMPlanner.Infrastructure.Entities;
+using SMPlanner.Infrastructure.Enum;
 
 namespace SMP.Application.Posts.Commands.AutomatePosts;
 
@@ -33,11 +33,5 @@ public class AutomatePostsCommandHandler(ISender sender) : IRequestHandler<Autom
             }
         }
 
-    }
-    private async Task<bool> CreatePostLinkedIn(ISender sender, CreatePostLinkedCommand command)
-    {
-        var result = await sender.Send(command);
-
-        return result;
     }
 }

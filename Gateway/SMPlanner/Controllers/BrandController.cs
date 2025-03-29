@@ -1,8 +1,8 @@
 ﻿using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SMPlanner.Infrastructure.Constantes;
-using SMPlanner.Infrastructure.Entite;
+using SMPlanner.Infrastructure.Constants;
+using SMPlanner.Infrastructure.Entities;
 
 namespace SMPlanner.Controllers;
 [ApiController]
