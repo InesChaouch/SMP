@@ -6,6 +6,7 @@ using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
+using SMP.Application.Common.Interfaces;
 using SMP.Application.Interfaces;
 using SMP.Application.PostContent.Commands.GenerateContent;
 using SMP.Application.Posts.Commands.AutomatePosts;
@@ -14,11 +15,13 @@ using SMP.Domain.Enums;
 using System.Net.Http.Json;
 using System.Text.Json;
 
-public class CreatePostLinkedCommandHandler(ILinkedInService linkedInService, HttpClient httpClient, ISender sender) : IRequestHandler<CreatePostLinkedCommand, bool>
+public class CreatePostLinkedCommandHandler(ILinkedInService linkedInService, HttpClient httpClient, ISender sender, IApplicationDbContext context) : IRequestHandler<CreatePostLinkedCommand, bool>
 {
     private readonly ILinkedInService _linkedInService = linkedInService;
     private readonly HttpClient _httpClient = httpClient;
     private readonly ISender _sender = sender;
+    private readonly IApplicationDbContext _context = context;
+
 
     public async Task<bool> Handle(CreatePostLinkedCommand request, CancellationToken cancellationToken)
     {
@@ -34,144 +37,93 @@ public class CreatePostLinkedCommandHandler(ILinkedInService linkedInService, Ht
 
         var content = await GeneratePostContent(_sender, generateContentCommand);
 
-        if (request.Config.Format == Format.Text)
+        if (request.Config.Format == Format.Document)
         {
-            _ = await _linkedInService.SharePostAsync(content);
-        }
-        else if (request.Config.Format == Format.Image)
-        {
-
-            byte[] backgroundBytes = !string.IsNullOrWhiteSpace(request.Config.BackgroundImage)
-                ? await _httpClient.GetByteArrayAsync(request.Config.BackgroundImage)
-                : await _httpClient.GetByteArrayAsync("https://thefusioneer.com/wp-content/uploads/2023/11/5-AI-Advancements-to-Expect-in-the-Next-10-Years-scaled.jpeg");
-
-            using var image = Image.Load(backgroundBytes);
-
-            var font = SystemFonts.CreateFont("Arial", 40);
-            var textOptions = new RichTextOptions(font)
-            {
-                HorizontalAlignment = HorizontalAlignment.Center,
-                VerticalAlignment = VerticalAlignment.Center,
-                Origin = new PointF(image.Width / 2, image.Height / 2)
-            };
-
-            image.Mutate(ctx =>
-            {
-                ctx.DrawText(textOptions, content, Color.White);
-            });
-
-            using var ms = new MemoryStream();
-            await image.SaveAsJpegAsync(ms);
-            var finalImageBytes = ms.ToArray();
-
-            var resultInitializeImage = await _linkedInService.InitializeImage();
-            var resultToRead = await resultInitializeImage.Content.ReadFromJsonAsync<JsonElement>();
-
-            var uploadUrl = resultToRead.GetProperty("value").GetProperty("uploadMechanism")
-                .GetProperty("com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest")
-                .GetProperty("uploadUrl").GetString();
-
-            var assetUrn = resultToRead.GetProperty("value").GetProperty("asset").GetString()?.Substring(25);
-
-            await _linkedInService.UploadImage(uploadUrl!, finalImageBytes);
-            await _linkedInService.SharePostImageAsync(assetUrn!);
-        }
-        else if (request.Config.Format == Format.Document)
-        {
-            byte[] backgroundBytes = !string.IsNullOrWhiteSpace(request.Config.BackgroundImage)
-                ? await _httpClient.GetByteArrayAsync(request.Config.BackgroundImage)
-                : await _httpClient.GetByteArrayAsync("https://thefusioneer.com/wp-content/uploads/2023/11/5-AI-Advancements-to-Expect-in-the-Next-10-Years-scaled.jpeg");
-           
-            var document = new PdfDocument();
-
             var slides = JsonSerializer.Deserialize<List<Slide>>(content, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             });
+            if (slides == null) throw new Exception("Slides content empty!");
+            var template = await _context.Templates
+                .Include(t => t.TemplateSlides)
+                    .ThenInclude(s => s.Elements)
+                .FirstOrDefaultAsync(t => t.Id == 18, cancellationToken);
 
-            if (slides == null || slides.Count == 0)
-                throw new InvalidOperationException("Generated content could not be parsed into valid slides.");
-
-            var font = SystemFonts.CreateFont("Arial", 40);
-
-            {
-                using var image = Image.Load<Rgba32>(backgroundBytes);
-                image.Mutate(x => x.Resize(1200, 627));
-                image.Mutate(ctx =>
-                {
-                    var titleOptions = new RichTextOptions(font)
-                    {
-                        Origin = new PointF(image.Width / 2, image.Height / 2),
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        WrappingLength = image.Width - 100
-                    };
-                    ctx.DrawText(titleOptions, generateContentCommand.Topic, Color.White);
-                });
-
-                using var ms = new MemoryStream();
-                await image.SaveAsPngAsync(ms, new PngEncoder { CompressionLevel = PngCompressionLevel.Level6 });
-                ms.Seek(0, SeekOrigin.Begin);
-
-                using var xImage = XImage.FromStream(ms);
-                var page = document.AddPage();
-                page.Width = XUnit.FromPoint(1200);
-                page.Height = XUnit.FromPoint(627);
-                using var gfx = XGraphics.FromPdfPage(page);
-                gfx.DrawImage(xImage, 0, 0, page.Width.Point, page.Height.Point);
-            }
+            if (template == null)
+                throw new Exception("Template not found");
 
             foreach (var slide in slides)
             {
-                using var image = Image.Load<Rgba32>(backgroundBytes);
-                image.Mutate(x => x.Resize(1200, 627));
-                image.Mutate(ctx =>
-                {
-                    var titleOptions = new RichTextOptions(font)
-                    {
-                        Origin = new PointF(image.Width / 2, image.Height / 3),
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        WrappingLength = image.Width - 100
-                    };
-                    ctx.DrawText(titleOptions, slide.Title, Color.White);
+                var templateSlide = template.TemplateSlides.FirstOrDefault(ts => ts.SlideNumber == slide.SlideNumber);
+                if (templateSlide == null)
+                    continue;
 
-                    var contentOptions = new RichTextOptions(font)
-                    {
-                        Origin = new PointF(image.Width / 2, image.Height * 2 / 3),
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        WrappingLength = image.Width - 100
-                    };
-                    ctx.DrawText(contentOptions, slide.Content, Color.LightGray);
-                });
+                var title = templateSlide.Elements.FirstOrDefault(e => e.ElementType == "Title");
+                if (title != null) title.Text = "AI";
 
-                using var ms = new MemoryStream();
-                await image.SaveAsPngAsync(ms, new PngEncoder { CompressionLevel = PngCompressionLevel.Level6 });
-                ms.Seek(0, SeekOrigin.Begin);
+                var subtitle = templateSlide.Elements.FirstOrDefault(e => e.ElementType == "Subtitle");
+                if (subtitle != null) subtitle.Text = slide.Title;
 
-                using var xImage = XImage.FromStream(ms);
-                var page = document.AddPage();
-                page.Width = XUnit.FromPoint(1200);
-                page.Height = XUnit.FromPoint(627);
-                using var gfx = XGraphics.FromPdfPage(page);
-                gfx.DrawImage(xImage, 0, 0, page.Width.Point, page.Height.Point);
+                var contentElement = templateSlide.Elements.FirstOrDefault(e => e.ElementType == "Content");
+                if (contentElement != null) contentElement.Text = slide.Content;
             }
 
+            await _context.SaveChangesAsync(cancellationToken);
+            var document = new PdfDocument();
+
+            foreach (var slide in template.TemplateSlides)
             {
-                using var image = Image.Load<Rgba32>(backgroundBytes);
+                var background = slide.BackgroundValue?.Length > 0 ? slide.BackgroundValue :
+                    await _httpClient.GetByteArrayAsync("https://thefusioneer.com/wp-content/uploads/2023/11/5-AI-Advancements-to-Expect-in-the-Next-10-Years-scaled.jpeg");
+
+                using var image = Image.Load<Rgba32>(background);
                 image.Mutate(x => x.Resize(1200, 627));
-                image.Mutate(ctx =>
+
+                foreach (var element in slide.Elements)
                 {
-                    var footerOptions = new RichTextOptions(font)
+                    var font = SystemFonts.CreateFont(element.TextFont, element.TextSize);
+                    var options = new RichTextOptions(font)
                     {
-                        Origin = new PointF(image.Width / 2, image.Height / 2),
-                        HorizontalAlignment = HorizontalAlignment.Center,
-                        VerticalAlignment = VerticalAlignment.Center,
-                        WrappingLength = image.Width - 100
+                        Origin = new PointF(
+                            element.HorizontalAlignment switch
+                            {
+                                "Left" => element.XPadding,
+                                "Right" => image.Width - element.XPadding,
+                                _ => image.Width / 2
+                            },
+                            element.VerticalAlignment switch
+                            {
+                                "Top" => element.YPadding,
+                                "Bottom" => image.Height - element.YPadding,
+                                _ => image.Height / 2
+                            }),
+                        HorizontalAlignment = element.HorizontalAlignment switch
+                        {
+                            "Left" => HorizontalAlignment.Left,
+                            "Right" => HorizontalAlignment.Right,
+                            _ => HorizontalAlignment.Center
+                        },
+                        VerticalAlignment = element.VerticalAlignment switch
+                        {
+                            "Top" => VerticalAlignment.Top,
+                            "Bottom" => VerticalAlignment.Bottom,
+                            _ => VerticalAlignment.Center
+                        },
+                        WrappingLength = image.Width - (element.XPadding * 2)
                     };
-                    ctx.DrawText(footerOptions, "🚀 Thanks for reading!", Color.White);
-                });
+
+                    image.Mutate(ctx =>
+                    {
+                        ctx.DrawText(options, element.Text, Color.ParseHex(element.TextColor));
+                    });
+                }
+
+                //if (slide.LogoValue?.Length > 0)
+                //{
+                //    using var logoImage = Image.Load<Rgba32>(slide.LogoValue);
+                //    logoImage.Mutate(l => l.Resize(100, 100));
+                //    image.Mutate(ctx => ctx.DrawImage(logoImage, new Point(image.Width - 110, 20), 1f));
+                //}
 
                 using var ms = new MemoryStream();
                 await image.SaveAsPngAsync(ms, new PngEncoder { CompressionLevel = PngCompressionLevel.Level6 });
@@ -184,7 +136,7 @@ public class CreatePostLinkedCommandHandler(ILinkedInService linkedInService, Ht
                 using var gfx = XGraphics.FromPdfPage(page);
                 gfx.DrawImage(xImage, 0, 0, page.Width.Point, page.Height.Point);
             }
-           
+
             using var outputStream = new MemoryStream();
             document.Save(outputStream, false);
             var fileBytes = outputStream.ToArray();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -7,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace SMP.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -49,6 +50,64 @@ namespace SMP.Infrastructure.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Channels",
+                columns: table => new
+                {
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Icon = table.Column<string>(type: "text", nullable: false),
+                    IsConnected = table.Column<bool>(type: "boolean", nullable: false),
+                    RedirectUri = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Channels", x => x.Name);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PostFormat",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    PostFormatType = table.Column<string>(type: "character varying(13)", maxLength: 13, nullable: false),
+                    Images = table.Column<List<string>>(type: "text[]", nullable: true),
+                    ImageUrl = table.Column<string>(type: "text", nullable: true),
+                    Text = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PostFormat", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PostStatus",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Description = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PostStatus", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Templates",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Format = table.Column<string>(type: "text", nullable: false),
+                    BrandDomain = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Templates", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,6 +235,54 @@ namespace SMP.Infrastructure.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ChannelProfiles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserName = table.Column<string>(type: "text", nullable: false),
+                    Headline = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    CoverPhoto = table.Column<string>(type: "text", nullable: false),
+                    Photo = table.Column<string>(type: "text", nullable: false),
+                    ProfileId = table.Column<string>(type: "text", nullable: false),
+                    ProfileLink = table.Column<string>(type: "text", nullable: false),
+                    ChannelName = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChannelProfiles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ChannelProfiles_Channels_ChannelName",
+                        column: x => x.ChannelName,
+                        principalTable: "Channels",
+                        principalColumn: "Name",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TemplateSlides",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    BackgroundType = table.Column<string>(type: "text", nullable: false),
+                    BackgroundValue = table.Column<byte[]>(type: "bytea", nullable: false),
+                    LogoValue = table.Column<byte[]>(type: "bytea", nullable: false),
+                    TemplateId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TemplateSlides", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TemplateSlides_Templates_TemplateId",
+                        column: x => x.TemplateId,
+                        principalTable: "Templates",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TodoItems",
                 columns: table => new
                 {
@@ -199,6 +306,83 @@ namespace SMP.Infrastructure.Data.Migrations
                         name: "FK_TodoItems_TodoLists_ListId",
                         column: x => x.ListId,
                         principalTable: "TodoLists",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Posts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Caption = table.Column<string>(type: "text", nullable: false),
+                    MediaValue = table.Column<byte[]>(type: "bytea", nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ModifiesdBy = table.Column<string>(type: "text", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    DeletedBy = table.Column<string>(type: "text", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    ChannelProfileId = table.Column<int>(type: "integer", nullable: false),
+                    PostFormatId = table.Column<int>(type: "integer", nullable: false),
+                    PostStatusId = table.Column<int>(type: "integer", nullable: false),
+                    TemplateId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Posts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Posts_ChannelProfiles_ChannelProfileId",
+                        column: x => x.ChannelProfileId,
+                        principalTable: "ChannelProfiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Posts_PostFormat_PostFormatId",
+                        column: x => x.PostFormatId,
+                        principalTable: "PostFormat",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Posts_PostStatus_PostStatusId",
+                        column: x => x.PostStatusId,
+                        principalTable: "PostStatus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Posts_Templates_TemplateId",
+                        column: x => x.TemplateId,
+                        principalTable: "Templates",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TemplateSlideElements",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TextFont = table.Column<string>(type: "text", nullable: false),
+                    TextSize = table.Column<int>(type: "integer", nullable: false),
+                    TextWeight = table.Column<string>(type: "text", nullable: false),
+                    TextColor = table.Column<string>(type: "text", nullable: false),
+                    HorizontalAlignment = table.Column<string>(type: "text", nullable: false),
+                    VerticalAlignment = table.Column<string>(type: "text", nullable: false),
+                    XPadding = table.Column<int>(type: "integer", nullable: false),
+                    YPadding = table.Column<int>(type: "integer", nullable: false),
+                    ElementType = table.Column<string>(type: "text", nullable: false),
+                    Text = table.Column<string>(type: "text", nullable: false),
+                    TemplateSlideId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TemplateSlideElements", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TemplateSlideElements_TemplateSlides_TemplateSlideId",
+                        column: x => x.TemplateSlideId,
+                        principalTable: "TemplateSlides",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -241,6 +425,41 @@ namespace SMP.Infrastructure.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_ChannelProfiles_ChannelName",
+                table: "ChannelProfiles",
+                column: "ChannelName");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_ChannelProfileId",
+                table: "Posts",
+                column: "ChannelProfileId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_PostFormatId",
+                table: "Posts",
+                column: "PostFormatId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_PostStatusId",
+                table: "Posts",
+                column: "PostStatusId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_TemplateId",
+                table: "Posts",
+                column: "TemplateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TemplateSlideElements_TemplateSlideId",
+                table: "TemplateSlideElements",
+                column: "TemplateSlideId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TemplateSlides_TemplateId",
+                table: "TemplateSlides",
+                column: "TemplateId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TodoItems_ListId",
                 table: "TodoItems",
                 column: "ListId");
@@ -265,6 +484,12 @@ namespace SMP.Infrastructure.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Posts");
+
+            migrationBuilder.DropTable(
+                name: "TemplateSlideElements");
+
+            migrationBuilder.DropTable(
                 name: "TodoItems");
 
             migrationBuilder.DropTable(
@@ -274,7 +499,25 @@ namespace SMP.Infrastructure.Data.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
+                name: "ChannelProfiles");
+
+            migrationBuilder.DropTable(
+                name: "PostFormat");
+
+            migrationBuilder.DropTable(
+                name: "PostStatus");
+
+            migrationBuilder.DropTable(
+                name: "TemplateSlides");
+
+            migrationBuilder.DropTable(
                 name: "TodoLists");
+
+            migrationBuilder.DropTable(
+                name: "Channels");
+
+            migrationBuilder.DropTable(
+                name: "Templates");
         }
     }
 }

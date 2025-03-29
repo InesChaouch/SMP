@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SMP.Domain.Entities.Enums;
 using SMP.Domain.Entities.Enums.PostFormat;
+using SMP.Domain.Entities.TemplateEntities;
 
 namespace SMP.Domain.Entities.PostEntities
 {
@@ -12,7 +13,7 @@ namespace SMP.Domain.Entities.PostEntities
     {
         public int Id { get; set; }
         public required string Caption { get; set; }
-        public required string Content { get; set; }
+        public Byte[] MediaValue { get; set; } = [];
         public required string CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; } // add required later
         public required string ModifiesdBy { get; set; }
@@ -27,5 +28,7 @@ namespace SMP.Domain.Entities.PostEntities
         public PostFormat PostFormat { get; set; } = null!;
         public int PostStatusId { get; set; }
         public PostStatus PostStatus { get; set; } = null!;
+        public int TemplateId { get; set; }
+        public Template Template { get; set; } = null!;
     }
 }

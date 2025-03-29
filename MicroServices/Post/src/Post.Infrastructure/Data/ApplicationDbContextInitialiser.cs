@@ -42,7 +42,10 @@ public class ApplicationDbContextInitialiser
     {
         try
         {
-            await _context.Database.MigrateAsync();
+            if ((await _context.Database.GetPendingMigrationsAsync()).Any())
+            {
+               // await _context.Database.MigrateAsync();
+            }
         }
         catch (Exception ex)
         {

@@ -11,5 +11,9 @@ public class TemplateSlideElement
     public required string VerticalAlignment { get; set; } 
     public int XPadding { get; set; }
     public int YPadding { get; set; }
+    public string ElementType { get; set; } = string.Empty;
     public string Text { get; set; } = string.Empty;
+    //navigation prop
+    public int TemplateSlideId { get; set; }
+    public TemplateSlide TemplateSlide { get; set; } = null!;
 }

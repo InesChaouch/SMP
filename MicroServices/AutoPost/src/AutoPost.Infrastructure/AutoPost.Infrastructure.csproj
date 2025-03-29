@@ -22,4 +22,8 @@
     <ProjectReference Include="..\AutoPost.Application\AutoPost.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
+  </ItemGroup>
+
 </Project>

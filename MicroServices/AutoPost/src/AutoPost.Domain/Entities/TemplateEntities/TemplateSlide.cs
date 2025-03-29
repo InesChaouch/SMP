@@ -9,11 +9,14 @@ namespace SMP.Domain.Entities.TemplateEntities
     public class TemplateSlide
     {
         public int Id { get; set; }
-        public required TemplateSlideElement Subtitle { get; set; }
-        public required TemplateSlideElement Title { get; set; }
-        public required List<TemplateSlideElement> Content { get; set; }
+        public int SlideNumber { get; set; }
         public required string BackgroundType { get; set; }
-        public byte[] BackgroundImage { get; set; } = [];
+        public required byte[] BackgroundValue { get; set; }
         public byte[] LogoValue { get; set; } = [];
+
+        //navigation prop
+        public List<TemplateSlideElement> Elements { get; set; } = [];
+        public int TemplateId { get; set; }
+        public Template Template { get; set; } = null!;
     }
 }

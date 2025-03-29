@@ -87,11 +87,7 @@ namespace SMP.Application.Posts.Commands.AutomatePosts
                 byte[] backgroundBytes = !string.IsNullOrWhiteSpace(request.Config.BackgroundImage)
                     ? await _httpClient.GetByteArrayAsync(request.Config.BackgroundImage)
                     : await _httpClient.GetByteArrayAsync("https://thefusioneer.com/wp-content/uploads/2023/11/5-AI-Advancements-to-Expect-in-the-Next-10-Years-scaled.jpeg");
-                var resultInitializeDocument = await _linkedInService.InitializeDocument();
-                var resultToRead = await resultInitializeDocument.Content.ReadFromJsonAsync<JsonElement>();
-
-                var uploadUrl = resultToRead.GetProperty("value").GetProperty("uploadUrl").GetString();
-                var assetUrn = resultToRead.GetProperty("value").GetProperty("document").GetString()?.Substring(16);
+           
                 var document = new PdfDocument();
                 
                 var slides = JsonSerializer.Deserialize<List<Slide>>(content, new JsonSerializerOptions
@@ -198,7 +194,11 @@ namespace SMP.Application.Posts.Commands.AutomatePosts
                 using var outputStream = new MemoryStream();
                 document.Save(outputStream, false);
                 var fileBytes = outputStream.ToArray();
+                var resultInitializeDocument = await _linkedInService.InitializeDocument();
+                var resultToRead = await resultInitializeDocument.Content.ReadFromJsonAsync<JsonElement>();
 
+                var uploadUrl = resultToRead.GetProperty("value").GetProperty("uploadUrl").GetString();
+                var assetUrn = resultToRead.GetProperty("value").GetProperty("document").GetString()?.Substring(16);
                 await _linkedInService.UploadDocument(uploadUrl!, fileBytes);
                 await _linkedInService.SharePostDocumentAsync(assetUrn!);
             }

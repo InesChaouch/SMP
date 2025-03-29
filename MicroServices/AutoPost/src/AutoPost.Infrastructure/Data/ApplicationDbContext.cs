@@ -9,6 +9,7 @@ using SMP.Domain.Entities.ChannelEntities;
 using System.Reflection.Emit;
 using SMP.Domain.Entities.Enums.PostFormat;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using SMP.Domain.Entities.TemplateEntities;
 
 namespace SMP.Infrastructure.Data;
 
@@ -28,8 +29,12 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<ImageFormat> ImageFormats { get; set; }
     public DbSet<CarrouselFormat> CarrouselFormats { get; set; }
 
+    public DbSet<Template> Templates { get; set; }
+    public DbSet<TemplateSlide> TemplateSlides { get; set; }
+    public DbSet<TemplateSlideElement> TemplateSlideElements { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
+
         builder
            .Entity<Channel>()
                .HasMany(c => c.ChannelProfiles)
@@ -64,9 +69,25 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     .HasValue<ImageFormat>("Image")
     .HasValue<CarrouselFormat>("Carrousel");
 
+        builder.Entity<Template>()
+                  .HasMany(t => t.TemplateSlides)
+                  .WithOne(ts => ts.Template)
+                  .HasForeignKey(ts => ts.TemplateId)
+                  .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<TemplateSlide>()
+            .HasMany(ts => ts.Elements)
+            .WithOne(e => e.TemplateSlide)
+            .HasForeignKey(e => e.TemplateSlideId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Entity<Template>()
+    .HasMany(t => t.Posts)
+    .WithOne(p => p.Template)
+    .HasForeignKey(p => p.TemplateId)
+    .OnDelete(DeleteBehavior.Restrict);
+
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
     }
-
 }

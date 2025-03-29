@@ -13,8 +13,8 @@ using SMP.Infrastructure.Data;
 namespace SMP.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250319113045_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20250329095342_SlideNumberAddedToTemplateSlide")]
+    partial class SlideNumberAddedToTemplateSlide
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -284,10 +284,6 @@ namespace SMP.Infrastructure.Data.Migrations
                     b.Property<int>("ChannelProfileId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("CreatedBy")
                         .IsRequired()
                         .HasColumnType("text");
@@ -302,6 +298,10 @@ namespace SMP.Infrastructure.Data.Migrations
                     b.Property<DateTime>("DeletedOn")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<byte[]>("MediaValue")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
                     b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("timestamp with time zone");
 
@@ -315,6 +315,9 @@ namespace SMP.Infrastructure.Data.Migrations
                     b.Property<int>("PostStatusId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("TemplateId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ChannelProfileId");
@@ -323,7 +326,118 @@ namespace SMP.Infrastructure.Data.Migrations
 
                     b.HasIndex("PostStatusId");
 
-                    b.ToTable("Post");
+                    b.HasIndex("TemplateId");
+
+                    b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("SMP.Domain.Entities.TemplateEntities.Template", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BrandDomain")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Format")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Templates");
+                });
+
+            modelBuilder.Entity("SMP.Domain.Entities.TemplateEntities.TemplateSlide", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("BackgroundType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<byte[]>("BackgroundValue")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
+                    b.Property<byte[]>("LogoValue")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
+                    b.Property<int>("SlideNumber")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TemplateId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TemplateId");
+
+                    b.ToTable("TemplateSlides");
+                });
+
+            modelBuilder.Entity("SMP.Domain.Entities.TemplateEntities.TemplateSlideElement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ElementType")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("HorizontalAlignment")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("TemplateSlideId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TextColor")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("TextFont")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("TextSize")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TextWeight")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("VerticalAlignment")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("XPadding")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("YPadding")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TemplateSlideId");
+
+                    b.ToTable("TemplateSlideElements");
                 });
 
             modelBuilder.Entity("SMP.Domain.Entities.TodoItem", b =>
@@ -582,11 +696,41 @@ namespace SMP.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("SMP.Domain.Entities.TemplateEntities.Template", "Template")
+                        .WithMany("Posts")
+                        .HasForeignKey("TemplateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.Navigation("ChannelProfile");
 
                     b.Navigation("PostFormat");
 
                     b.Navigation("PostStatus");
+
+                    b.Navigation("Template");
+                });
+
+            modelBuilder.Entity("SMP.Domain.Entities.TemplateEntities.TemplateSlide", b =>
+                {
+                    b.HasOne("SMP.Domain.Entities.TemplateEntities.Template", "Template")
+                        .WithMany("TemplateSlides")
+                        .HasForeignKey("TemplateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Template");
+                });
+
+            modelBuilder.Entity("SMP.Domain.Entities.TemplateEntities.TemplateSlideElement", b =>
+                {
+                    b.HasOne("SMP.Domain.Entities.TemplateEntities.TemplateSlide", "TemplateSlide")
+                        .WithMany("Elements")
+                        .HasForeignKey("TemplateSlideId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TemplateSlide");
                 });
 
             modelBuilder.Entity("SMP.Domain.Entities.TodoItem", b =>
@@ -641,6 +785,18 @@ namespace SMP.Infrastructure.Data.Migrations
             modelBuilder.Entity("SMP.Domain.Entities.Enums.PostStatus", b =>
                 {
                     b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("SMP.Domain.Entities.TemplateEntities.Template", b =>
+                {
+                    b.Navigation("Posts");
+
+                    b.Navigation("TemplateSlides");
+                });
+
+            modelBuilder.Entity("SMP.Domain.Entities.TemplateEntities.TemplateSlide", b =>
+                {
+                    b.Navigation("Elements");
                 });
 
             modelBuilder.Entity("SMP.Domain.Entities.TodoList", b =>

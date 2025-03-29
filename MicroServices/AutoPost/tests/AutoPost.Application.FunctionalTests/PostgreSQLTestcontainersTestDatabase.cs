@@ -46,7 +46,11 @@ public class PostgreSQLTestcontainersTestDatabase : ITestDatabase
 
         var context = new ApplicationDbContext(options);
 
-        await context.Database.MigrateAsync();
+        var pendingMigrations = await context.Database.GetPendingMigrationsAsync();
+        if (pendingMigrations.Any())
+        {
+            //await context.Database.MigrateAsync();
+        }
 
         await _connection.OpenAsync();
         _respawner = await Respawner.CreateAsync(_connection, new RespawnerOptions
