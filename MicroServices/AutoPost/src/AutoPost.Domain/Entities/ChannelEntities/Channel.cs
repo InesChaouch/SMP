@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SMP.Domain.Entities.PostEntities;
+using AutoPost.Domain.Entities.PostEntities;
 
-namespace SMP.Domain.Entities.ChannelEntities;
+namespace AutoPost.Domain.Entities.ChannelEntities;
 
 public class Channel
 {

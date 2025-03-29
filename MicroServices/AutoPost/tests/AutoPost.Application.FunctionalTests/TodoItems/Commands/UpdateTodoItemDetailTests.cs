@@ -1,11 +1,11 @@
-﻿using SMP.Application.TodoItems.Commands.CreateTodoItem;
-using SMP.Application.TodoItems.Commands.UpdateTodoItem;
-using SMP.Application.TodoItems.Commands.UpdateTodoItemDetail;
-using SMP.Application.TodoLists.Commands.CreateTodoList;
-using SMP.Domain.Entities;
-using SMP.Domain.Enums;
+﻿using AutoPost.Application.TodoItems.Commands.CreateTodoItem;
+using AutoPost.Application.TodoItems.Commands.UpdateTodoItem;
+using AutoPost.Application.TodoItems.Commands.UpdateTodoItemDetail;
+using AutoPost.Application.TodoLists.Commands.CreateTodoList;
+using AutoPost.Domain.Entities;
+using AutoPost.Domain.Enums;
 
-namespace SMP.Application.FunctionalTests.TodoItems.Commands;
+namespace AutoPost.Application.FunctionalTests.TodoItems.Commands;
 
 using static Testing;
 

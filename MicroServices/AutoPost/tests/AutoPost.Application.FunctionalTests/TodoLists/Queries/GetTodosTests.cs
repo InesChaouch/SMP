@@ -1,8 +1,8 @@
-﻿using SMP.Application.TodoLists.Queries.GetTodos;
-using SMP.Domain.Entities;
-using SMP.Domain.ValueObjects;
+﻿using AutoPost.Application.TodoLists.Queries.GetTodos;
+using AutoPost.Domain.Entities;
+using AutoPost.Domain.ValueObjects;
 
-namespace SMP.Application.FunctionalTests.TodoLists.Queries;
+namespace AutoPost.Application.FunctionalTests.TodoLists.Queries;
 
 using static Testing;
 

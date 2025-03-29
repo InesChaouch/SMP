@@ -1,15 +1,15 @@
-﻿using SMP.Domain.Constants;
-using SMP.Domain.Entities;
-using SMP.Infrastructure.Identity;
+﻿using AutoPost.Domain.Constants;
+using AutoPost.Domain.Entities;
+using AutoPost.Infrastructure.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using SMP.Domain.Entities.TemplateEntities;
-using SMP.Domain.Entities.Enums.PostFormat;
+using AutoPost.Domain.Entities.TemplateEntities;
+using AutoPost.Domain.Entities.Enums.PostFormat;
 
-namespace SMP.Infrastructure.Data;
+namespace AutoPost.Infrastructure.Data;
 
 public static class InitialiserExtensions
 {

@@ -1,6 +1,6 @@
-﻿using SMP.Application.Common.Models;
+﻿using AutoPost.Application.Common.Models;
 
-namespace SMP.Application.Common.Interfaces;
+namespace AutoPost.Application.Common.Interfaces;
 
 public interface IIdentityService
 {

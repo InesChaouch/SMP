@@ -1,6 +1,6 @@
-﻿using SMP.Application.Common.Interfaces;
+﻿using AutoPost.Application.Common.Interfaces;
 
-namespace SMP.Application.TodoLists.Commands.CreateTodoList;
+namespace AutoPost.Application.TodoLists.Commands.CreateTodoList;
 
 public class CreateTodoListCommandValidator : AbstractValidator<CreateTodoListCommand>
 {

@@ -1,6 +1,6 @@
-﻿using SMP.Application.Common.Interfaces;
+﻿using AutoPost.Application.Common.Interfaces;
 
-namespace SMP.Application.TodoLists.Commands.DeleteTodoList;
+namespace AutoPost.Application.TodoLists.Commands.DeleteTodoList;
 
 public record DeleteTodoListCommand(int Id) : IRequest;
 

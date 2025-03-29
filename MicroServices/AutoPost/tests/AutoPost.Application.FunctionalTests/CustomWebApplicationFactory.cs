@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
-using SMP.Application.Common.Interfaces;
-using SMP.Infrastructure.Data;
+using AutoPost.Application.Common.Interfaces;
+using AutoPost.Infrastructure.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace SMP.Application.FunctionalTests;
+namespace AutoPost.Application.FunctionalTests;
 
 using static Testing;
 

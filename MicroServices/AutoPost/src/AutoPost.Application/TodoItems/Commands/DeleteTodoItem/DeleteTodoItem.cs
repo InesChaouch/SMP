@@ -1,7 +1,7 @@
-﻿using SMP.Application.Common.Interfaces;
-using SMP.Domain.Events;
+﻿using AutoPost.Application.Common.Interfaces;
+using AutoPost.Domain.Events;
 
-namespace SMP.Application.TodoItems.Commands.DeleteTodoItem;
+namespace AutoPost.Application.TodoItems.Commands.DeleteTodoItem;
 
 public record DeleteTodoItemCommand(int Id) : IRequest;
 

@@ -1,14 +1,14 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using AutoMapper;
-using SMP.Application.Common.Interfaces;
-using SMP.Application.Common.Models;
-using SMP.Application.TodoItems.Queries.GetTodoItemsWithPagination;
-using SMP.Application.TodoLists.Queries.GetTodos;
-using SMP.Domain.Entities;
+using AutoPost.Application.Common.Interfaces;
+using AutoPost.Application.Common.Models;
+using AutoPost.Application.TodoItems.Queries.GetTodoItemsWithPagination;
+using AutoPost.Application.TodoLists.Queries.GetTodos;
+using AutoPost.Domain.Entities;
 using NUnit.Framework;
 
-namespace SMP.Application.UnitTests.Common.Mappings;
+namespace AutoPost.Application.UnitTests.Common.Mappings;
 
 public class MappingTests
 {

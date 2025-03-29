@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
-using SMP.Application.PostContent.Commands.GenerateContent;
+using AutoPost.Application.PostContent.Commands.GenerateContent;
 
-namespace SMP.Application.PostContent.Commands.GenerateContentCommandHandler
+namespace AutoPost.Application.PostContent.Commands.GenerateContentCommandHandler
 {
     public class CreateBrandCommandHandler : IRequestHandler<CreateBrandCommand, string>
     {

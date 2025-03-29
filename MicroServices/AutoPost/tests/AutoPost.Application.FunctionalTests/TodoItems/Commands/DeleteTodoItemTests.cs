@@ -1,9 +1,9 @@
-﻿using SMP.Application.TodoItems.Commands.CreateTodoItem;
-using SMP.Application.TodoItems.Commands.DeleteTodoItem;
-using SMP.Application.TodoLists.Commands.CreateTodoList;
-using SMP.Domain.Entities;
+﻿using AutoPost.Application.TodoItems.Commands.CreateTodoItem;
+using AutoPost.Application.TodoItems.Commands.DeleteTodoItem;
+using AutoPost.Application.TodoLists.Commands.CreateTodoList;
+using AutoPost.Domain.Entities;
 
-namespace SMP.Application.FunctionalTests.TodoItems.Commands;
+namespace AutoPost.Application.FunctionalTests.TodoItems.Commands;
 
 using static Testing;
 

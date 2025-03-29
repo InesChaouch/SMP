@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SMP.Domain.Entities.PostEntities;
+using AutoPost.Domain.Entities.PostEntities;
 
-namespace SMP.Domain.Entities.Enums.PostFormat
+namespace AutoPost.Domain.Entities.Enums.PostFormat
 {
     public abstract class PostFormat
     {

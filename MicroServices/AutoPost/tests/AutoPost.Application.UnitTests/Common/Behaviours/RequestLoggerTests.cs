@@ -1,11 +1,11 @@
-﻿using SMP.Application.Common.Behaviours;
-using SMP.Application.Common.Interfaces;
-using SMP.Application.TodoItems.Commands.CreateTodoItem;
+﻿using AutoPost.Application.Common.Behaviours;
+using AutoPost.Application.Common.Interfaces;
+using AutoPost.Application.TodoItems.Commands.CreateTodoItem;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
 
-namespace SMP.Application.UnitTests.Common.Behaviours;
+namespace AutoPost.Application.UnitTests.Common.Behaviours;
 
 public class RequestLoggerTests
 {

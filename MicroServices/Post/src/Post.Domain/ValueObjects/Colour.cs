@@ -1,4 +1,4 @@
-﻿namespace SMP.Domain.ValueObjects;
+﻿namespace AutoPost.Domain.ValueObjects;
 
 public class Colour(string code) : ValueObject
 {

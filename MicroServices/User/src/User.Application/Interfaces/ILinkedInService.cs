@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SMP.Application.Interfaces
+namespace AutoPost.Application.Interfaces
 {
     public interface ILinkedInService
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SMP.Application.Common.Helpers.Pdf
+namespace AutoPost.Application.Common.Helpers.Pdf
 {
     using System;
     using System.Reflection;

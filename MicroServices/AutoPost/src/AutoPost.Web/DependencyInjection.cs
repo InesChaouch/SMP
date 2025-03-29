@@ -1,11 +1,14 @@
 ﻿using Azure.Identity;
-using SMP.Application.Common.Interfaces;
-using SMP.Infrastructure.Data;
-using SMP.Web.Services;
+using AutoPost.Application.Common.Interfaces;
+using AutoPost.Infrastructure.Data;
+using AutoPost.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 
 using NSwag;
 using NSwag.Generation.Processors.Security;
+using AutoPost.Application.Interfaces;
+using AutoPost.Application;
+using AutoPost.Infrastructure.Repository;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +25,7 @@ public static class DependencyInjection
             .AddDbContextCheck<ApplicationDbContext>();
 
         builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
 
 
         // Customise default API behaviour

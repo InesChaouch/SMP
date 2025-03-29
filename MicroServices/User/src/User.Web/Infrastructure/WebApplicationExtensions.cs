@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace SMP.Web.Infrastructure;
+namespace AutoPost.Web.Infrastructure;
 
 public static class WebApplicationExtensions
 {

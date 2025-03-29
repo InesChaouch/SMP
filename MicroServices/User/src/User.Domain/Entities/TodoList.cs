@@ -1,4 +1,4 @@
-﻿namespace SMP.Domain.Entities;
+﻿namespace AutoPost.Domain.Entities;
 
 public class TodoList : BaseAuditableEntity
 {

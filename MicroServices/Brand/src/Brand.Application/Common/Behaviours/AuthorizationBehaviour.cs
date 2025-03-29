@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
-using SMP.Application.Common.Exceptions;
-using SMP.Application.Common.Interfaces;
-using SMP.Application.Common.Security;
+using AutoPost.Application.Common.Exceptions;
+using AutoPost.Application.Common.Interfaces;
+using AutoPost.Application.Common.Security;
 
-namespace SMP.Application.Common.Behaviours;
+namespace AutoPost.Application.Common.Behaviours;
 
 public class AuthorizationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 {

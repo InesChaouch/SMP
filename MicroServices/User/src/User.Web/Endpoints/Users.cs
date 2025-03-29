@@ -1,6 +1,6 @@
-﻿using SMP.Infrastructure.Identity;
+﻿using AutoPost.Infrastructure.Identity;
 
-namespace SMP.Web.Endpoints;
+namespace AutoPost.Web.Endpoints;
 
 public class Users : EndpointGroupBase
 {

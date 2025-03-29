@@ -1,4 +1,4 @@
-﻿namespace SMP.Application.Common.Exceptions;
+﻿namespace AutoPost.Application.Common.Exceptions;
 
 public class ForbiddenAccessException : Exception
 {

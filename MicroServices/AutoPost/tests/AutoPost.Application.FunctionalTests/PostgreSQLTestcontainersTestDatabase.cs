@@ -1,5 +1,5 @@
 ﻿using System.Data.Common;
-using SMP.Infrastructure.Data;
+using AutoPost.Infrastructure.Data;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -8,7 +8,7 @@ using Npgsql;
 using Respawn;
 using Testcontainers.PostgreSql;
 
-namespace SMP.Application.FunctionalTests;
+namespace AutoPost.Application.FunctionalTests;
 
 public class PostgreSQLTestcontainersTestDatabase : ITestDatabase
 {

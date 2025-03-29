@@ -1,4 +1,4 @@
-﻿namespace SMP.Application.FunctionalTests;
+﻿namespace AutoPost.Application.FunctionalTests;
 
 using static Testing;
 

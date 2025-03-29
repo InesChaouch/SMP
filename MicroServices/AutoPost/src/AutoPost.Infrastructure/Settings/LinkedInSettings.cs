@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SMP.Infrastructure.Settings
+namespace AutoPost.Infrastructure.Settings
 {
     public class LinkedInSettings
     {

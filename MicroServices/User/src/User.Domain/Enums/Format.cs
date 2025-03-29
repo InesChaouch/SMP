@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Text.Json.Serialization;
 
-namespace SMP.Domain.Enums
+namespace AutoPost.Domain.Enums
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum Format

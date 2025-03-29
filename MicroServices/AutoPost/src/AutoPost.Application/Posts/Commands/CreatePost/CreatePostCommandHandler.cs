@@ -8,19 +8,20 @@ using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SMP.Application.Common.Interfaces;
-using SMP.Application.Interfaces;
-using SMP.Application.PostContent.Commands.GenerateContent;
-using SMP.Application.Posts.Commands.AutomatePosts;
-using SMP.Domain.Dtos;
+using AutoPost.Application.Common.Interfaces;
+using AutoPost.Application.Interfaces;
+using AutoPost.Application.PostContent.Commands.GenerateContent;
+using AutoPost.Application.Posts.Commands.AutomatePosts;
+using AutoPost.Domain.Dtos;
 using SMPlanner.Infrastructure.Enum;
 
-public class CreatePostLinkedCommandHandler(ILinkedInService linkedInService, HttpClient httpClient, ISender sender, IApplicationDbContext context) : IRequestHandler<CreatePostLinkedCommand, bool>
+public class CreatePostLinkedCommandHandler(ILinkedInService linkedInService, HttpClient httpClient, ISender sender, IApplicationDbContext context, IUnitOfWork unitOfWork) : IRequestHandler<CreatePostLinkedCommand, bool>
 {
     private readonly ILinkedInService _linkedInService = linkedInService;
     private readonly HttpClient _httpClient = httpClient;
     private readonly ISender _sender = sender;
     private readonly IApplicationDbContext _context = context;
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
 
     public async Task<bool> Handle(CreatePostLinkedCommand request, CancellationToken cancellationToken)
@@ -44,10 +45,11 @@ public class CreatePostLinkedCommandHandler(ILinkedInService linkedInService, Ht
                 PropertyNameCaseInsensitive = true
             });
             if (slides == null) throw new Exception("Slides content empty!");
-            var template = await _context.Templates
-                .Include(t => t.TemplateSlides)
-                    .ThenInclude(s => s.Elements)
-                .FirstOrDefaultAsync(t => t.Id == 18, cancellationToken);
+            var template = await _unitOfWork.TemplateRepository.GetTemplateByIdAsync(18);
+                //_context.Templates
+                //.Include(t => t.TemplateSlides)
+                //    .ThenInclude(s => s.Elements)
+                //.FirstOrDefaultAsync(t => t.Id == 18, cancellationToken);
 
             if (template == null)
                 throw new Exception("Template not found");
@@ -68,7 +70,8 @@ public class CreatePostLinkedCommandHandler(ILinkedInService linkedInService, Ht
                 if (contentElement != null) contentElement.Text = slide.Content;
             }
 
-            await _context.SaveChangesAsync(cancellationToken);
+            //await _context.SaveChangesAsync(cancellationToken);
+            await _unitOfWork.SaveChangesAsync();
             var document = new PdfDocument();
 
             foreach (var slide in template.TemplateSlides)

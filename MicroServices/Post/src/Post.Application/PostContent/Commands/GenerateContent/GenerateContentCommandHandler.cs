@@ -4,11 +4,11 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
-using SMP.Application.PostContent.Commands.GenerateContent;
-using SMP.Domain.Enums;
+using AutoPost.Application.PostContent.Commands.GenerateContent;
+using AutoPost.Domain.Enums;
 using System.Text.RegularExpressions;
 
-namespace SMP.Application.PostContent.Commands.GenerateContentCommandHandler
+namespace AutoPost.Application.PostContent.Commands.GenerateContentCommandHandler
 {
     public class GenerateContentCommandHandler : IRequestHandler<GenerateContentCommand, string>
     {

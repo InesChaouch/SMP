@@ -1,4 +1,4 @@
-﻿namespace SMP.Domain.Common;
+﻿namespace AutoPost.Domain.Common;
 
 public abstract class BaseAuditableEntity : BaseEntity
 {

@@ -1,12 +1,12 @@
-﻿using SMP.Domain.Constants;
-using SMP.Infrastructure.Data;
-using SMP.Infrastructure.Identity;
+﻿using AutoPost.Domain.Constants;
+using AutoPost.Infrastructure.Data;
+using AutoPost.Infrastructure.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace SMP.Application.FunctionalTests;
+namespace AutoPost.Application.FunctionalTests;
 
 [SetUpFixture]
 public partial class Testing

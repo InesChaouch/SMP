@@ -1,7 +1,7 @@
-﻿using SMP.Domain.Events;
+﻿using AutoPost.Domain.Events;
 using Microsoft.Extensions.Logging;
 
-namespace SMP.Application.TodoItems.EventHandlers;
+namespace AutoPost.Application.TodoItems.EventHandlers;
 
 public class TodoItemCreatedEventHandler : INotificationHandler<TodoItemCreatedEvent>
 {

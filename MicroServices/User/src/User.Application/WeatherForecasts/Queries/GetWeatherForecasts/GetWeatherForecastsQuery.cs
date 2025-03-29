@@ -1,4 +1,4 @@
-﻿namespace SMP.Application.WeatherForecasts.Queries.GetWeatherForecasts;
+﻿namespace AutoPost.Application.WeatherForecasts.Queries.GetWeatherForecasts;
 
 public record GetWeatherForecastsQuery : IRequest<IEnumerable<WeatherForecast>>;
 

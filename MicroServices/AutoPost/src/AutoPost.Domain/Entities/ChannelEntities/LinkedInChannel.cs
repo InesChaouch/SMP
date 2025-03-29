@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SMP.Domain.Entities.ChannelEntities
+namespace AutoPost.Domain.Entities.ChannelEntities
 {
     public class LinkedInChannel : Channel
     {

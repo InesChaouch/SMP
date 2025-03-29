@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SMP.Domain.Entities.Enums;
+using AutoPost.Domain.Entities.Enums;
 
-namespace SMP.Domain.Entities
+namespace AutoPost.Domain.Entities
 {
     public class PostConfiguration
     {

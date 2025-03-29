@@ -1,8 +1,8 @@
-﻿using SMP.Application.Common.Exceptions;
-using SMP.Application.TodoLists.Commands.CreateTodoList;
-using SMP.Domain.Entities;
+﻿using AutoPost.Application.Common.Exceptions;
+using AutoPost.Application.TodoLists.Commands.CreateTodoList;
+using AutoPost.Domain.Entities;
 
-namespace SMP.Application.FunctionalTests.TodoLists.Commands;
+namespace AutoPost.Application.FunctionalTests.TodoLists.Commands;
 
 using static Testing;
 

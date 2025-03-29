@@ -1,9 +1,9 @@
-﻿using SMP.Domain.Exceptions;
-using SMP.Domain.ValueObjects;
+﻿using AutoPost.Domain.Exceptions;
+using AutoPost.Domain.ValueObjects;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace SMP.Domain.UnitTests.ValueObjects;
+namespace AutoPost.Domain.UnitTests.ValueObjects;
 
 public class ColourTests
 {

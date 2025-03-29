@@ -1,4 +1,4 @@
-﻿namespace SMP.Application.Common.Models;
+﻿namespace AutoPost.Application.Common.Models;
 
 public class PaginatedList<T>
 {

@@ -1,6 +1,6 @@
-﻿using ValidationException = SMP.Application.Common.Exceptions.ValidationException;
+﻿using ValidationException = AutoPost.Application.Common.Exceptions.ValidationException;
 
-namespace SMP.Application.Common.Behaviours;
+namespace AutoPost.Application.Common.Behaviours;
 
 public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
      where TRequest : notnull

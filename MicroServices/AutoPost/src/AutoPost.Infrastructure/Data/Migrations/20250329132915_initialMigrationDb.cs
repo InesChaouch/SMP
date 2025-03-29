@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace SMP.Infrastructure.Data.Migrations
+namespace AutoPost.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
     public partial class initialMigrationDb : Migration

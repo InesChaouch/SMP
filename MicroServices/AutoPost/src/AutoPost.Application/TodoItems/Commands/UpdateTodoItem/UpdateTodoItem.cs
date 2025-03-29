@@ -1,6 +1,6 @@
-﻿using SMP.Application.Common.Interfaces;
+﻿using AutoPost.Application.Common.Interfaces;
 
-namespace SMP.Application.TodoItems.Commands.UpdateTodoItem;
+namespace AutoPost.Application.TodoItems.Commands.UpdateTodoItem;
 
 public record UpdateTodoItemCommand : IRequest
 {

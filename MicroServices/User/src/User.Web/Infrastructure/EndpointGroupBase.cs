@@ -1,4 +1,4 @@
-﻿namespace SMP.Web.Infrastructure;
+﻿namespace AutoPost.Web.Infrastructure;
 
 public abstract class EndpointGroupBase
 {

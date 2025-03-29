@@ -1,4 +1,7 @@
-using SMP.Infrastructure.Data;
+using AutoPost.Application.Interfaces;
+using AutoPost.Application;
+using AutoPost.Infrastructure.Data;
+using AutoPost.Infrastructure.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 

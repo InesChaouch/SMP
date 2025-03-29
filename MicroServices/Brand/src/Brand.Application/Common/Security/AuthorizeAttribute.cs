@@ -1,4 +1,4 @@
-﻿namespace SMP.Application.Common.Security;
+﻿namespace AutoPost.Application.Common.Security;
 
 /// <summary>
 /// Specifies the class this attribute is applied to requires authorization.

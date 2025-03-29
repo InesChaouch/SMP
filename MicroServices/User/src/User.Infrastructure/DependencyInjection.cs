@@ -1,16 +1,16 @@
-﻿using SMP.Application.Common.Interfaces;
-using SMP.Domain.Constants;
-using SMP.Infrastructure.Data;
-using SMP.Infrastructure.Data.Interceptors;
-using SMP.Infrastructure.Identity;
+﻿using AutoPost.Application.Common.Interfaces;
+using AutoPost.Domain.Constants;
+using AutoPost.Infrastructure.Data;
+using AutoPost.Infrastructure.Data.Interceptors;
+using AutoPost.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using SMP.Infrastructure.Settings;
-using SMP.Application.Interfaces;
-using SMP.Infrastructure.Apis.LinkedIn;
+using AutoPost.Infrastructure.Settings;
+using AutoPost.Application.Interfaces;
+using AutoPost.Infrastructure.Apis.LinkedIn;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

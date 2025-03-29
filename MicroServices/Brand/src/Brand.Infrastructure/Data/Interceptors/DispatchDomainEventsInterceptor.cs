@@ -1,9 +1,9 @@
-﻿using SMP.Domain.Common;
+﻿using AutoPost.Domain.Common;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace SMP.Infrastructure.Data.Interceptors;
+namespace AutoPost.Infrastructure.Data.Interceptors;
 
 public class DispatchDomainEventsInterceptor : SaveChangesInterceptor
 {

@@ -1,4 +1,4 @@
-﻿namespace SMP.Domain.Constants;
+﻿namespace AutoPost.Domain.Constants;
 
 public abstract class Roles
 {

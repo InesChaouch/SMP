@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using BaselineTypeDiscovery;
 using DinkToPdf;
 
-namespace SMP.Application.Common.Helpers.Pdf
+namespace AutoPost.Application.Common.Helpers.Pdf
 {
     class PdfService
     {

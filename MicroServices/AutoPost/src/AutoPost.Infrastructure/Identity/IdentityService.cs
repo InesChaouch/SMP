@@ -1,10 +1,10 @@
-using SMP.Application.Common.Interfaces;
-using SMP.Application.Common.Models;
+using AutoPost.Application.Common.Interfaces;
+using AutoPost.Application.Common.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace SMP.Infrastructure.Identity;
+namespace AutoPost.Infrastructure.Identity;
 
 public class IdentityService : IIdentityService
 {

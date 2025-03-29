@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using AutoMapper;
-using SMP.Application.Common.Interfaces;
-using SMP.Application.Common.Models;
-using SMP.Domain.Entities;
+using AutoPost.Application.Common.Interfaces;
+using AutoPost.Application.Common.Models;
+using AutoPost.Domain.Entities;
 using NUnit.Framework;
 
-namespace SMP.Application.UnitTests.Common.Mappings;
+namespace AutoPost.Application.UnitTests.Common.Mappings;
 
 public class MappingTests
 {

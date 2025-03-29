@@ -1,4 +1,4 @@
-﻿namespace SMP.Domain.Events;
+﻿namespace AutoPost.Domain.Events;
 
 public class TodoItemDeletedEvent : BaseEvent
 {

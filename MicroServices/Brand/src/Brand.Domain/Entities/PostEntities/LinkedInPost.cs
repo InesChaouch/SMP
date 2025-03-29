@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SMP.Domain.Entities.PostEntities
+namespace AutoPost.Domain.Entities.PostEntities
 {
     public class LinkedInPost : Post
     {

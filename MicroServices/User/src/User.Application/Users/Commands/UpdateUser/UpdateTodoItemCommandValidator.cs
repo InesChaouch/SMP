@@ -1,4 +1,4 @@
-﻿namespace SMP.Application.TodoItems.Commands.UpdateTodoItem;
+﻿namespace AutoPost.Application.TodoItems.Commands.UpdateTodoItem;
 
 public class UpdateTodoItemCommandValidator : AbstractValidator<UpdateTodoItemCommand>
 {

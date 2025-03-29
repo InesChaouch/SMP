@@ -1,7 +1,7 @@
-﻿using SMP.Application.Common.Models;
+﻿using AutoPost.Application.Common.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace SMP.Infrastructure.Identity;
+namespace AutoPost.Infrastructure.Identity;
 
 public static class IdentityResultExtensions
 {

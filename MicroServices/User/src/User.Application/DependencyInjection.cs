@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using SMP.Application.Common.Behaviours;
+using AutoPost.Application.Common.Behaviours;
 using Microsoft.Extensions.Hosting;
 using System.Net.Http;
 

@@ -6,9 +6,9 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using SMP.Application.Interfaces;
+using AutoPost.Application.Interfaces;
 
-namespace SMP.Infrastructure.Apis.Gemini
+namespace AutoPost.Infrastructure.Apis.Gemini
 {
     public class GeminiService(HttpClient httpClient, IConfiguration config) : IGeminiService
     {

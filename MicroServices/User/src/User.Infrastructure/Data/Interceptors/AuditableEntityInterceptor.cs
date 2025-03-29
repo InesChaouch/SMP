@@ -1,10 +1,10 @@
-﻿using SMP.Application.Common.Interfaces;
-using SMP.Domain.Common;
+﻿using AutoPost.Application.Common.Interfaces;
+using AutoPost.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace SMP.Infrastructure.Data.Interceptors;
+namespace AutoPost.Infrastructure.Data.Interceptors;
 
 public class AuditableEntityInterceptor : SaveChangesInterceptor
 {

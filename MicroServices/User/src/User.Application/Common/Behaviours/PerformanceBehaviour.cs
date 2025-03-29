@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
-using SMP.Application.Common.Interfaces;
+using AutoPost.Application.Common.Interfaces;
 using Microsoft.Extensions.Logging;
 
-namespace SMP.Application.Common.Behaviours;
+namespace AutoPost.Application.Common.Behaviours;
 
 public class PerformanceBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull
 {

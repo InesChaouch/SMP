@@ -1,6 +1,6 @@
-﻿using SMP.Application.Common.Models;
+﻿using AutoPost.Application.Common.Models;
 
-namespace SMP.Application.TodoLists.Queries.GetTodos;
+namespace AutoPost.Application.TodoLists.Queries.GetTodos;
 
 public class TodosVm
 {

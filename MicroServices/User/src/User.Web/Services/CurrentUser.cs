@@ -1,8 +1,8 @@
 ﻿using System.Security.Claims;
 
-using SMP.Application.Common.Interfaces;
+using AutoPost.Application.Common.Interfaces;
 
-namespace SMP.Web.Services;
+namespace AutoPost.Web.Services;
 
 public class CurrentUser : IUser
 {

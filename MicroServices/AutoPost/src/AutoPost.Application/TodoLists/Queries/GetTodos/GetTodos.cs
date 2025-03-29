@@ -1,9 +1,9 @@
-﻿using SMP.Application.Common.Interfaces;
-using SMP.Application.Common.Models;
-using SMP.Application.Common.Security;
-using SMP.Domain.Enums;
+﻿using AutoPost.Application.Common.Interfaces;
+using AutoPost.Application.Common.Models;
+using AutoPost.Application.Common.Security;
+using AutoPost.Domain.Enums;
 
-namespace SMP.Application.TodoLists.Queries.GetTodos;
+namespace AutoPost.Application.TodoLists.Queries.GetTodos;
 
 //[Authorize]
 public record GetTodosQuery : IRequest<TodosVm>;

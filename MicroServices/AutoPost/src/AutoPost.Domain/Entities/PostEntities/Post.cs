@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SMP.Domain.Entities.Enums;
-using SMP.Domain.Entities.Enums.PostFormat;
-using SMP.Domain.Entities.TemplateEntities;
+using AutoPost.Domain.Entities.Enums;
+using AutoPost.Domain.Entities.Enums.PostFormat;
+using AutoPost.Domain.Entities.TemplateEntities;
 
-namespace SMP.Domain.Entities.PostEntities
+namespace AutoPost.Domain.Entities.PostEntities
 {
     public class Post
     {

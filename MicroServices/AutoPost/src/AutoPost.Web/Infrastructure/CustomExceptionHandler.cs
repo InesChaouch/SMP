@@ -1,8 +1,8 @@
-﻿using SMP.Application.Common.Exceptions;
+﻿using AutoPost.Application.Common.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SMP.Web.Infrastructure;
+namespace AutoPost.Web.Infrastructure;
 
 public class CustomExceptionHandler : IExceptionHandler
 {

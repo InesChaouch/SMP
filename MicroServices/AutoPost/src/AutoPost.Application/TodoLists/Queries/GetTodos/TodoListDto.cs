@@ -1,6 +1,6 @@
-﻿using SMP.Domain.Entities;
+﻿using AutoPost.Domain.Entities;
 
-namespace SMP.Application.TodoLists.Queries.GetTodos;
+namespace AutoPost.Application.TodoLists.Queries.GetTodos;
 
 public class TodoListDto
 {

@@ -1,8 +1,8 @@
-﻿using SMP.Application.Common.Interfaces;
+﻿using AutoPost.Application.Common.Interfaces;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
 
-namespace SMP.Application.Common.Behaviours;
+namespace AutoPost.Application.Common.Behaviours;
 
 public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest> where TRequest : notnull
 {

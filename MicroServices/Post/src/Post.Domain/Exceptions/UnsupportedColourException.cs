@@ -1,4 +1,4 @@
-﻿namespace SMP.Domain.Exceptions;
+﻿namespace AutoPost.Domain.Exceptions;
 
 public class UnsupportedColourException : Exception
 {

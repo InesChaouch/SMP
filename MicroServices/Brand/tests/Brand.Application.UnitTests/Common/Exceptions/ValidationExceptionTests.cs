@@ -1,9 +1,9 @@
-﻿using SMP.Application.Common.Exceptions;
+﻿using AutoPost.Application.Common.Exceptions;
 using FluentAssertions;
 using FluentValidation.Results;
 using NUnit.Framework;
 
-namespace SMP.Application.UnitTests.Common.Exceptions;
+namespace AutoPost.Application.UnitTests.Common.Exceptions;
 
 public class ValidationExceptionTests
 {

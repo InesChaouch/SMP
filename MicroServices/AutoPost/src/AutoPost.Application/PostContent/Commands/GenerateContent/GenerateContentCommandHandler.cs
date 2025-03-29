@@ -1,10 +1,10 @@
 ﻿using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
-using SMP.Application.Interfaces;
+using AutoPost.Application.Interfaces;
 using SMPlanner.Infrastructure.Enum;
 
-namespace SMP.Application.PostContent.Commands.GenerateContent
+namespace AutoPost.Application.PostContent.Commands.GenerateContent
 {
     public class GenerateContentCommandHandler(IGeminiService geminiService) : IRequestHandler<GenerateContentCommand, string>
     {

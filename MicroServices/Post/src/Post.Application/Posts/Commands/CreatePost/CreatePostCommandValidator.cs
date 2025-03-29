@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SMP.Application.PostContent.Commands.CreatePost
+namespace AutoPost.Application.PostContent.Commands.CreatePost
 {
     class CreatePostCommandValidator
     {

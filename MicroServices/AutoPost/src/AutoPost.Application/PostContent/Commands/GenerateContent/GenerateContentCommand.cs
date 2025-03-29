@@ -1,6 +1,6 @@
 ﻿using SMPlanner.Infrastructure.Enum;
 
-namespace SMP.Application.PostContent.Commands.GenerateContent
+namespace AutoPost.Application.PostContent.Commands.GenerateContent
 {
     public class GenerateContentCommand : IRequest<string>
     {

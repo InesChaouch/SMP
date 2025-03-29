@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using SMP.Infrastructure.Data;
+using AutoPost.Infrastructure.Data;
 
 #nullable disable
 
-namespace SMP.Infrastructure.Data.Migrations
+namespace AutoPost.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20250329132915_initialMigrationDb")]

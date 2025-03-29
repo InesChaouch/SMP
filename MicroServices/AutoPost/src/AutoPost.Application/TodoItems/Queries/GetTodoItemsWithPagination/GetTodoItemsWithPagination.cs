@@ -1,8 +1,8 @@
-﻿using SMP.Application.Common.Interfaces;
-using SMP.Application.Common.Mappings;
-using SMP.Application.Common.Models;
+﻿using AutoPost.Application.Common.Interfaces;
+using AutoPost.Application.Common.Mappings;
+using AutoPost.Application.Common.Models;
 
-namespace SMP.Application.TodoItems.Queries.GetTodoItemsWithPagination;
+namespace AutoPost.Application.TodoItems.Queries.GetTodoItemsWithPagination;
 
 public record GetTodoItemsWithPaginationQuery : IRequest<PaginatedList<TodoItemBriefDto>>
 {

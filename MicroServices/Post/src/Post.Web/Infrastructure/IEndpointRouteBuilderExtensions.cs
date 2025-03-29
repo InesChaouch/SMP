@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace SMP.Web.Infrastructure;
+namespace AutoPost.Web.Infrastructure;
 
 public static class IEndpointRouteBuilderExtensions
 {

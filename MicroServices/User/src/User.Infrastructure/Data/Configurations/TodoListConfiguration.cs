@@ -1,8 +1,8 @@
-﻿using SMP.Domain.Entities;
+﻿using AutoPost.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace SMP.Infrastructure.Data.Configurations;
+namespace AutoPost.Infrastructure.Data.Configurations;
 
 public class TodoListConfiguration : IEntityTypeConfiguration<TodoList>
 {

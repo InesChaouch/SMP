@@ -1,6 +1,6 @@
-﻿using SMP.Application.Common.Models;
+﻿using AutoPost.Application.Common.Models;
 
-namespace SMP.Application.Common.Mappings;
+namespace AutoPost.Application.Common.Mappings;
 
 public static class MappingExtensions
 {

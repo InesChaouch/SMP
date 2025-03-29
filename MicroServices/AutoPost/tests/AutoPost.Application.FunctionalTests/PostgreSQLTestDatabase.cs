@@ -1,12 +1,12 @@
 ﻿using System.Data.Common;
-using SMP.Infrastructure.Data;
+using AutoPost.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 using Respawn;
 
-namespace SMP.Application.FunctionalTests;
+namespace AutoPost.Application.FunctionalTests;
 
 public class PostgreSQLTestDatabase : ITestDatabase
 {

@@ -1,6 +1,6 @@
-﻿using SMP.Domain.Entities;
+﻿using AutoPost.Domain.Entities;
 
-namespace SMP.Application.TodoItems.Queries.GetTodoItemsWithPagination;
+namespace AutoPost.Application.TodoItems.Queries.GetTodoItemsWithPagination;
 
 public class TodoItemBriefDto
 {

@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 
-namespace SMP.Application.FunctionalTests;
+namespace AutoPost.Application.FunctionalTests;
 
 public interface ITestDatabase
 {

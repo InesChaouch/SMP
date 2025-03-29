@@ -1,4 +1,4 @@
-﻿namespace SMP.Domain.Enums;
+﻿namespace AutoPost.Domain.Enums;
 
 public enum PriorityLevel
 {

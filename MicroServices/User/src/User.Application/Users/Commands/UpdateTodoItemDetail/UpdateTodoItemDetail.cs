@@ -1,7 +1,7 @@
-﻿using SMP.Application.Common.Interfaces;
-using SMP.Domain.Enums;
+﻿using AutoPost.Application.Common.Interfaces;
+using AutoPost.Domain.Enums;
 
-namespace SMP.Application.TodoItems.Commands.UpdateTodoItemDetail;
+namespace AutoPost.Application.TodoItems.Commands.UpdateTodoItemDetail;
 
 public record UpdateTodoItemDetailCommand : IRequest
 {

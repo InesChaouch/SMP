@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SMP.Domain.Dtos
+namespace AutoPost.Domain.Dtos
 {
     public class Slide
     {

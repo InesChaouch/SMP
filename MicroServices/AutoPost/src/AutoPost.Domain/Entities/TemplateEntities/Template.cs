@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SMP.Domain.Entities.Enums.PostFormat;
-using SMP.Domain.Entities.PostEntities;
+using AutoPost.Domain.Entities.Enums.PostFormat;
+using AutoPost.Domain.Entities.PostEntities;
 
-namespace SMP.Domain.Entities.TemplateEntities
+namespace AutoPost.Domain.Entities.TemplateEntities
 {
     public class Template
     {

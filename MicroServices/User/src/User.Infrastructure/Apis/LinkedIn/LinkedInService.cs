@@ -2,10 +2,10 @@
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
-using SMP.Infrastructure.Settings;
-using SMP.Application.Interfaces;
+using AutoPost.Infrastructure.Settings;
+using AutoPost.Application.Interfaces;
 
-namespace SMP.Infrastructure.Apis.LinkedIn
+namespace AutoPost.Infrastructure.Apis.LinkedIn
 {
     public class LinkedInService : ILinkedInService
     {

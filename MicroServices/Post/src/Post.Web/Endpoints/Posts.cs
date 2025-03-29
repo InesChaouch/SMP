@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
-using SMP.Application.Posts.Commands.AutomatePosts;
+using AutoPost.Application.Posts.Commands.AutomatePosts;
 
 
 public class Posts : EndpointGroupBase

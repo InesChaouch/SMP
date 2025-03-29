@@ -1,4 +1,4 @@
-using SMP.Infrastructure.Data;
+using AutoPost.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

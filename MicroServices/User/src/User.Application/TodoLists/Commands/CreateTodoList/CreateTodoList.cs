@@ -1,7 +1,7 @@
-﻿using SMP.Application.Common.Interfaces;
-using SMP.Domain.Entities;
+﻿using AutoPost.Application.Common.Interfaces;
+using AutoPost.Domain.Entities;
 
-namespace SMP.Application.TodoLists.Commands.CreateTodoList;
+namespace AutoPost.Application.TodoLists.Commands.CreateTodoList;
 
 public record CreateTodoListCommand : IRequest<int>
 {

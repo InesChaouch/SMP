@@ -1,19 +1,19 @@
 ﻿using MediatR;
-using SMP.Application.Common.Interfaces;
-using SMP.Application.Interfaces;
-using SMP.Application.PostContent.Commands.GenerateContent;
-using SMP.Application.PostContent.Commands.CreatePost;
-using SMP.Application.TodoItems.Commands.CreateTodoItem;
+using AutoPost.Application.Common.Interfaces;
+using AutoPost.Application.Interfaces;
+using AutoPost.Application.PostContent.Commands.GenerateContent;
+using AutoPost.Application.PostContent.Commands.CreatePost;
+using AutoPost.Application.TodoItems.Commands.CreateTodoItem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SMP.Domain.Dtos;
-using SMP.Domain.Enums;
-using SMP.Application.Posts.Commands.AutomatePosts;
+using AutoPost.Domain.Dtos;
+using AutoPost.Domain.Enums;
+using AutoPost.Application.Posts.Commands.AutomatePosts;
 
-namespace SMP.Application.PostContent.Commands.AutomatePosts
+namespace AutoPost.Application.PostContent.Commands.AutomatePosts
 {
     public record AutomatePostCommand : IRequest
     {

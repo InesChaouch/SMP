@@ -1,4 +1,4 @@
-﻿namespace SMP.Application.Common.Interfaces;
+﻿namespace AutoPost.Application.Common.Interfaces;
 
 public interface IUser
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SMP.Domain.Common;
+namespace AutoPost.Domain.Common;
 
 public abstract class BaseEntity
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace SMP.Infrastructure.Identity;
+namespace AutoPost.Infrastructure.Identity;
 
 public class ApplicationUser : IdentityUser
 {

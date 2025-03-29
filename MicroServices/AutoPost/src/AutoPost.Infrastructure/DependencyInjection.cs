@@ -1,17 +1,20 @@
-﻿using SMP.Application.Common.Interfaces;
-using SMP.Domain.Constants;
-using SMP.Infrastructure.Data;
-using SMP.Infrastructure.Data.Interceptors;
-using SMP.Infrastructure.Identity;
+﻿using AutoPost.Application.Common.Interfaces;
+using AutoPost.Domain.Constants;
+using AutoPost.Infrastructure.Data;
+using AutoPost.Infrastructure.Data.Interceptors;
+using AutoPost.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using SMP.Infrastructure.Settings;
-using SMP.Application.Interfaces;
-using SMP.Infrastructure.Apis.LinkedIn;
-using SMP.Infrastructure.Apis.Gemini;
+using AutoPost.Infrastructure.Settings;
+using AutoPost.Application.Interfaces;
+using AutoPost.Infrastructure.Apis.LinkedIn;
+using AutoPost.Infrastructure.Apis.Gemini;
+using AutoPost.Application;
+using AutoPost.Infrastructure.Repository;
+using SMP.Infrastructure.Repository;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -24,7 +27,9 @@ public static class DependencyInjection
 
         builder.Services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
         builder.Services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
-
+        builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+        builder.Services.AddScoped<IPostRepository, PostRepository>();
+        builder.Services.AddScoped<ITemplateRepository, TemplateRepository>();
         builder.Services.AddDbContext<ApplicationDbContext>((sp, options) =>
         {
             options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());

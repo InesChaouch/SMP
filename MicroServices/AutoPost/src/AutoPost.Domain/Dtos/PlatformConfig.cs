@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SMP.Domain.Dtos
+namespace AutoPost.Domain.Dtos
 {
     public class PlatformConfig
     {

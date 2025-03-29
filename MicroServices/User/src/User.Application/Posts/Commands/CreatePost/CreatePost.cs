@@ -1,7 +1,7 @@
-﻿using SMP.Application.Interfaces;
-using SMP.Application.PostContent.Commands.GenerateContent;
-using SMP.Domain.Dtos;
-using SMP.Domain.Enums;
+﻿using AutoPost.Application.Interfaces;
+using AutoPost.Application.PostContent.Commands.GenerateContent;
+using AutoPost.Domain.Dtos;
+using AutoPost.Domain.Enums;
 using System.Text.Json;
 using System.Net.Http.Json;
 using SixLabors.Fonts;
@@ -13,7 +13,7 @@ using PdfSharp.Drawing;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Formats.Png;
 
-namespace SMP.Application.Posts.Commands.AutomatePosts
+namespace AutoPost.Application.Posts.Commands.AutomatePosts
 {
     public record CreatePostLinkedCommand : IRequest<bool>
     {

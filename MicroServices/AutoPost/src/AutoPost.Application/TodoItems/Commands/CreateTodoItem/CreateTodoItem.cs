@@ -1,8 +1,8 @@
-﻿using SMP.Application.Common.Interfaces;
-using SMP.Domain.Entities;
-using SMP.Domain.Events;
+﻿using AutoPost.Application.Common.Interfaces;
+using AutoPost.Domain.Entities;
+using AutoPost.Domain.Events;
 
-namespace SMP.Application.TodoItems.Commands.CreateTodoItem;
+namespace AutoPost.Application.TodoItems.Commands.CreateTodoItem;
 
 public record CreateTodoItemCommand : IRequest<int>
 {

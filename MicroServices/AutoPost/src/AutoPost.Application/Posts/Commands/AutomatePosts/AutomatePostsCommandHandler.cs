@@ -1,8 +1,8 @@
-﻿using SMP.Application.PostContent.Commands.AutomatePosts;
+﻿using AutoPost.Application.PostContent.Commands.AutomatePosts;
 using SMPlanner.Infrastructure.Entities;
 using SMPlanner.Infrastructure.Enum;
 
-namespace SMP.Application.Posts.Commands.AutomatePosts;
+namespace AutoPost.Application.Posts.Commands.AutomatePosts;
 
 public class AutomatePostsCommandHandler(ISender sender) : IRequestHandler<AutomatePostsCommand>
 {

@@ -1,8 +1,8 @@
-﻿using SMP.Application.Common.Interfaces;
-using SMP.Application.Common.Security;
-using SMP.Domain.Constants;
+﻿using AutoPost.Application.Common.Interfaces;
+using AutoPost.Application.Common.Security;
+using AutoPost.Domain.Constants;
 
-namespace SMP.Application.TodoLists.Commands.PurgeTodoLists;
+namespace AutoPost.Application.TodoLists.Commands.PurgeTodoLists;
 
 [Authorize(Roles = Roles.Administrator)]
 [Authorize(Policy = Policies.CanPurge)]

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using SMP.Application.PostContent.Commands.GenerateContent;
+using AutoPost.Application.PostContent.Commands.GenerateContent;
 
-namespace SMP.Web.Endpoints;
+namespace AutoPost.Web.Endpoints;
 
 public class Content : EndpointGroupBase
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SMP.Domain.Constants
+namespace AutoPost.Domain.Constants
 {
     public abstract class LinkedIn
     {

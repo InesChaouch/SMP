@@ -1,19 +1,19 @@
 ﻿using System.Reflection;
-using SMP.Application.Common.Interfaces;
-using SMP.Domain.Entities;
-using SMP.Infrastructure.Identity;
+using AutoPost.Application.Common.Interfaces;
+using AutoPost.Domain.Entities;
+using AutoPost.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SMP.Domain.Entities.PostEntities;
-using SMP.Domain.Entities.ChannelEntities;
+using AutoPost.Domain.Entities.PostEntities;
+using AutoPost.Domain.Entities.ChannelEntities;
 using System.Reflection.Emit;
-using SMP.Domain.Entities.Enums.PostFormat;
+using AutoPost.Domain.Entities.Enums.PostFormat;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using SMP.Domain.Entities.TemplateEntities;
+using AutoPost.Domain.Entities.TemplateEntities;
 
-namespace SMP.Infrastructure.Data;
+namespace AutoPost.Infrastructure.Data;
 
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
+public class ApplicationDbContext :  IdentityDbContext<ApplicationUser>, IApplicationDbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
@@ -32,6 +32,15 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     public DbSet<Template> Templates { get; set; }
     public DbSet<TemplateSlide> TemplateSlides { get; set; }
     public DbSet<TemplateSlideElement> TemplateSlideElements { get; set; }
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        return base.SaveChangesAsync(cancellationToken);
+    }
+
+    public Task<int> SaveChangesAsync()
+    {
+        return SaveChangesAsync(CancellationToken.None);
+    }
     protected override void OnModelCreating(ModelBuilder builder)
     {
 

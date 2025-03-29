@@ -1,4 +1,4 @@
-﻿namespace SMP.Domain.Entities.TemplateEntities;
+﻿namespace AutoPost.Domain.Entities.TemplateEntities;
 
 public class TemplateSlideElement
 {

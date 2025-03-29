@@ -1,4 +1,4 @@
-﻿namespace SMP.Application.TodoItems.Queries.GetTodoItemsWithPagination;
+﻿namespace AutoPost.Application.TodoItems.Queries.GetTodoItemsWithPagination;
 
 public class GetTodoItemsWithPaginationQueryValidator : AbstractValidator<GetTodoItemsWithPaginationQuery>
 {

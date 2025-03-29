@@ -1,7 +1,7 @@
 ﻿using Azure.Identity;
-using SMP.Application.Common.Interfaces;
-using SMP.Infrastructure.Data;
-using SMP.Web.Services;
+using AutoPost.Application.Common.Interfaces;
+using AutoPost.Infrastructure.Data;
+using AutoPost.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 
 using NSwag;

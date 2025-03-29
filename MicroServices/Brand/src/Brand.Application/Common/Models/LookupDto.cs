@@ -1,6 +1,6 @@
-﻿using SMP.Domain.Entities;
+﻿using AutoPost.Domain.Entities;
 
-namespace SMP.Application.Common.Models;
+namespace AutoPost.Application.Common.Models;
 
 public class LookupDto
 {
